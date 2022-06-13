@@ -4,7 +4,7 @@ import 'reusable_container.dart';
 import 'reusable_icon_content.dart';
 import 'constants.dart';
 
-enum gender { male, female, nul }
+enum Gender { male, female, nul }
 
 class InputPage extends StatefulWidget {
   const InputPage({Key? key}) : super(key: key);
@@ -16,7 +16,7 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Color maleColor = kInactiveContainerColor;
   Color femaleColor = kInactiveContainerColor;
-  gender selectedGender = gender.nul;
+  Gender selectedGender = Gender.nul;
   int height = 180;
 
   @override
@@ -35,10 +35,10 @@ class _InputPageState extends State<InputPage> {
                       child: ReusableContainer(
                     onPress: () {
                       setState(() {
-                        selectedGender = gender.male;
+                        selectedGender = Gender.male;
                       });
                     },
-                    colour: (selectedGender == gender.male)
+                    colour: (selectedGender == Gender.male)
                         ? kActiveContainerColor
                         : kInactiveContainerColor,
                     childWidget: IconContent(
@@ -50,10 +50,10 @@ class _InputPageState extends State<InputPage> {
                       child: ReusableContainer(
                     onPress: () {
                       setState(() {
-                        selectedGender = gender.female;
+                        selectedGender = Gender.female;
                       });
                     },
-                    colour: (selectedGender == gender.female)
+                    colour: (selectedGender == Gender.female)
                         ? kActiveContainerColor
                         : kInactiveContainerColor,
                     childWidget: IconContent(
@@ -71,7 +71,7 @@ class _InputPageState extends State<InputPage> {
               childWidget: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
+                  const Text(
                     'HEIGHT',
                     style: kTextStyle,
                   ),
@@ -84,23 +84,32 @@ class _InputPageState extends State<InputPage> {
                         height.toString(),
                         style: kTextStyle2,
                       ),
-                      Text(
+                      const Text(
                         'cm',
                         style: kTextStyle,
                       ),
                     ],
                   ),
-                  Slider(
-                      value: height.toDouble(),
-                      min: 120,
-                      max: 220,
-                      activeColor: Color(0xFFEB1515),
-                      inactiveColor: Color(0xFF8D8E98),
-                      onChanged: (double newValue) {
-                        setState(() {
-                          height = newValue.round();
-                        });
-                      })
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                        activeTrackColor: Colors.white,
+                        thumbColor: const Color(0xFFEB1515),
+                        overlayColor: const Color(0x29EB1515),
+                        thumbShape: const RoundSliderThumbShape(
+                            enabledThumbRadius: 15.0),
+                        overlayShape:
+                            const RoundSliderOverlayShape(overlayRadius: 30.0)),
+                    child: Slider(
+                        value: height.toDouble(),
+                        min: 120,
+                        max: 220,
+                        inactiveColor: const Color(0xFF8D8E98),
+                        onChanged: (double newValue) {
+                          setState(() {
+                            height = newValue.round();
+                          });
+                        }),
+                  )
                 ],
               ),
             )),
