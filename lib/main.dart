@@ -1,5 +1,5 @@
 // ignore_for_file: prefer_const_constructors
-import 'InputPage.dart';
+import 'screens/InputPage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,11 +17,11 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData.dark().copyWith(
-            colorScheme:
-                ColorScheme.light().copyWith(primary: Color(0xFF0A0E21)),
-            scaffoldBackgroundColor: Color(0xFF0A0E21)),
-        home: InputPage());
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark().copyWith(
+          colorScheme: ColorScheme.light().copyWith(primary: Color(0xFF0A0E21)),
+          scaffoldBackgroundColor: Color(0xFF0A0E21)),
+      home: InputPage(),
+    );
   }
 }
